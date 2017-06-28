@@ -31,10 +31,12 @@ public class SSUserDetailsServices implements UserDetailsService {
         try {
             User user = userRepository.findByUsername(username);
             if (user == null) {
+                LOGGER.debug("Usernot found");
                 return null;
             }
-
+            LOGGER.debug("User found");
             return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(), getAuthorities(user));
+
         }
         catch(Exception e){
 
